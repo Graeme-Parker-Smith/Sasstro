@@ -8,7 +8,7 @@ btnHamburger.addEventListener('click', function () {
 	console.log('open hamburger');
 	if (header.classList.contains('open')) {
 		// Close Hamburger Menu
-		body.classList.remove("noscroll")
+		body.classList.remove('noscroll');
 
 		header.classList.remove('open');
 		fadeElems.forEach(function (element) {
@@ -17,9 +17,27 @@ btnHamburger.addEventListener('click', function () {
 		});
 		overlay.classList.remove('fade-in');
 		overlay.classList.add('fade-out');
+
+		// click overlay to close menu too
+		overlay.addEventListener('click', function () {
+			console.log('clicked overlay!');
+			if (header.classList.contains('open')) {
+				// Close Hamburger Menu
+				body.classList.remove('noscroll');
+
+				header.classList.remove('open');
+				fadeElems.forEach(function (element) {
+					element.classList.remove('fade-in');
+					element.classList.add('fade-out');
+				});
+				overlay.classList.remove('fade-in');
+				overlay.classList.add('fade-out');
+			}
+			overlay.removeEventListener('click');
+		});
 	} else {
 		//Open Hamburger Menu
-		body.classList.add("noscroll")
+		body.classList.add('noscroll');
 		header.classList.add('open');
 		fadeElems.forEach(function (element) {
 			element.classList.remove('fade-out');
